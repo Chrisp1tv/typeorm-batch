@@ -1,4 +1,4 @@
-import { batch } from "../src/query-builder-batch";
+import { batch } from "../src";
 import { ObjectLiteral, SelectQueryBuilder } from "typeorm";
 import Mock = jest.Mock;
 
