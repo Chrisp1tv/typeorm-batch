@@ -1,6 +1,5 @@
 {
-  "*": [
-    "npm run lint:fix",
-    "npm run test -- --passWithNoTests"
-  ]
+  "*.{ts*,js*}": ["npm run test -- --passWithNoTests"],
+  "*.{ts*,js*,yml}": ["npm run lint:fix"],
+  "*.{json,md,java}": "prettier --write"
 }
