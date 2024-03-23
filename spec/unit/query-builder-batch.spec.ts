@@ -1,6 +1,6 @@
-import { batch } from "../src";
 import { ObjectLiteral, SelectQueryBuilder } from "typeorm";
 import Mock = jest.Mock;
+import { batch } from "../../src";
 
 describe(batch, () => {
   describe("validations", () => {
