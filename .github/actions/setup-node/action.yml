@@ -1,0 +1,27 @@
+name: "Setup Node"
+description: "Setup Node with the given version"
+
+inputs:
+  node-version:
+    description: "The Node version to use to install the project"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Install Node
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ inputs.node-version }}
+        node-version-file: ".nvmrc"
+        cache: npm
+    - name: Restore dependencies from cached node_modules directory
+      uses: actions/cache@v3
+      id: node-modules-cache
+      with:
+        path: "**/node_modules"
+        key: ${{ runner.os }}-${{ inputs.node-version }}-${{ hashFiles('**/package-lock.json') }}-node-modules
+    - name: Install dependencies if cache not cached
+      if: steps.node-modules-cache.outputs.cache-hit != 'true'
+      shell: bash
+      run: npm ci
