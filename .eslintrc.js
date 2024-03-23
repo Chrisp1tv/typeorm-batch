@@ -1,36 +1,37 @@
 module.exports = {
   parserOptions: {
     ecmaVersion: 2023,
-    sourceType: 'module',
+    sourceType: "module",
   },
-  plugins: ['no-only-tests'],
-  extends: ['plugin:prettier/recommended'],
+  plugins: ["no-only-tests"],
+  extends: ["plugin:prettier/recommended"],
   env: {
     node: true,
     jest: true,
   },
-  ignorePatterns: [
-    '.eslintrc.js',
-    'node_modules',
-    'dist',
-  ],
+  ignorePatterns: ["!.*", "node_modules", "dist", "*.json", ".nvmrc"],
   root: true,
   overrides: [
     {
-      extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended'],
-      files: ['**/*.ts', '**/*.tsx'],
-      parser: '@typescript-eslint/parser',
+      extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended"],
+      files: ["**/*.ts", "**/*.tsx"],
+      parser: "@typescript-eslint/parser",
       parserOptions: {
-        project: 'tsconfig.json',
+        project: "tsconfig.json",
         tsconfigRootDir: __dirname,
-        sourceType: 'module',
+        sourceType: "module",
       },
       rules: {
-        '@typescript-eslint/no-floating-promises': 'error',
-        'no-console': 'error',
-        'no-only-tests/no-only-tests': 'error',
+        "@typescript-eslint/no-floating-promises": "error",
+        "no-console": "error",
+        "no-only-tests/no-only-tests": "error",
       },
-      plugins: ['@typescript-eslint'],
+      plugins: ["@typescript-eslint"],
+    },
+    {
+      extends: ["plugin:yml/prettier"],
+      files: ["*.yaml", "*.yml"],
+      parser: "yaml-eslint-parser",
     },
   ],
 };
