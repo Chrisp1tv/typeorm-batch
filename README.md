@@ -1,4 +1,4 @@
-## TypeORM batch
+# TypeORM batch
 
 This project provides a simple way to batch select data from any database supported by TypeORM.
 
