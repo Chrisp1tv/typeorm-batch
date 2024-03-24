@@ -1,4 +1,4 @@
-name: Tests
+name: E2E Tests
 
 on:
   push:
@@ -12,8 +12,13 @@ jobs:
 
     strategy:
       matrix:
-        config: [
-            # For TypeORM 0.3.20, minimum is Node 16.13
+        config:
+          [
+            { node: "16.13", typeorm: "0.3.20" },
+            { node: "17", typeorm: "0.3.20" },
+            { node: "18", typeorm: "0.3.20" },
+            { node: "19", typeorm: "0.3.20" },
+            { node: "20", typeorm: "0.3.20" },
             { node: "21", typeorm: "0.3.20" },
           ]
 
@@ -30,5 +35,5 @@ jobs:
       - name: Install TypeORM
         run: npm install typeorm@${{ matrix.config.typeorm }}
 
-      - name: Run tests
-        run: npm run test:unit
+      - name: Run E2E tests
+        run: npm run test:e2e

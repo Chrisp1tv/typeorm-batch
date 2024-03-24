@@ -6,8 +6,9 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "test": "./node_modules/.bin/jest",
-    "build": "./node_modules/.bin/tsc",
+    "test:unit": "jest --config jest.unit.config.ts",
+    "test:e2e": "npm run build && jest --config jest.e2e.config.ts",
+    "build": "ts-node ./scripts/build.ts",
     "prepare": "husky"
   },
   "author": {
@@ -16,9 +17,10 @@
   "types": "./index.d.ts",
   "license": "MIT",
   "engines": {
-    "node": ">=12.9"
+    "node": ">=16.13"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "^10.7.2",
     "@types/jest": "^29.5.12",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "eslint": "^8.57.0",
@@ -29,9 +31,13 @@
     "husky": "^9.0.11",
     "jest": "^29.7.0",
     "lint-staged": "^15.2.2",
+    "pg": "^8.11.3",
     "prettier": "^3.2.5",
+    "rimraf": "^5.0.5",
+    "testcontainers": "^10.7.2",
     "ts-jest": "^29.1.2",
-    "typeorm": "^0.3.18",
+    "ts-node": "^10.9.2",
+    "typeorm": "^0.3.20",
     "typescript": "^4.9.5"
   },
   "peerDependencies": {
