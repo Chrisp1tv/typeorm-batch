@@ -1,0 +1,38 @@
+name: E2E Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        config: [
+            # For TypeORM 0.3.18, minimum is Node 12.9
+            { node: "21", typeorm: "0.3.18" },
+            # For TypeORM 0.3.19, minimum is Node 12.9
+            { node: "21", typeorm: "0.3.19" },
+            # For TypeORM 0.3.20, minimum is Node 16.13
+            { node: "21", typeorm: "0.3.20" },
+          ]
+
+    name: Node ${{ matrix.config.node }}, TypeORM ${{ matrix.config.typeorm }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: ./.github/actions/setup-node
+        with:
+          node-version: ${{ matrix.config.node }}
+
+      - name: Install TypeORM
+        run: npm install typeorm@${{ matrix.config.typeorm }}
+
+      - name: Run tests
+        run: npm run test:e2e
