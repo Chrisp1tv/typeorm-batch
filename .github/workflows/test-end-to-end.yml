@@ -35,5 +35,5 @@ jobs:
       - name: Install TypeORM
         run: npm install typeorm@${{ matrix.config.typeorm }}
 
-      - name: Run tests
+      - name: Run E2E tests
         run: npm run test:e2e
