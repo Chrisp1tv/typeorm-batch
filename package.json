@@ -8,7 +8,7 @@
     "lint:fix": "eslint . --fix",
     "test:unit": "jest --config jest.unit.config.ts",
     "test:e2e": "npm run build && jest --config jest.e2e.config.ts",
-    "build": "rimraf ./dist && tsc --project tsconfig.build.json",
+    "build": "ts-node ./scripts/build.ts",
     "prepare": "husky"
   },
   "author": {
