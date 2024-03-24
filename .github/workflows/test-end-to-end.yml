@@ -14,10 +14,33 @@ jobs:
       matrix:
         config: [
             # For TypeORM 0.3.18, minimum is Node 12.9
+            { node: "12.9", typeorm: "0.3.18" },
+            { node: "13", typeorm: "0.3.18" },
+            { node: "14", typeorm: "0.3.18" },
+            { node: "15", typeorm: "0.3.18" },
+            { node: "16", typeorm: "0.3.18" },
+            { node: "17", typeorm: "0.3.18" },
+            { node: "18", typeorm: "0.3.18" },
+            { node: "19", typeorm: "0.3.18" },
+            { node: "20", typeorm: "0.3.18" },
             { node: "21", typeorm: "0.3.18" },
             # For TypeORM 0.3.19, minimum is Node 12.9
+            { node: "12.9", typeorm: "0.3.19" },
+            { node: "13", typeorm: "0.3.19" },
+            { node: "14", typeorm: "0.3.19" },
+            { node: "15", typeorm: "0.3.19" },
+            { node: "16", typeorm: "0.3.19" },
+            { node: "17", typeorm: "0.3.19" },
+            { node: "18", typeorm: "0.3.19" },
+            { node: "19", typeorm: "0.3.19" },
+            { node: "20", typeorm: "0.3.19" },
             { node: "21", typeorm: "0.3.19" },
             # For TypeORM 0.3.20, minimum is Node 16.13
+            { node: "16.13", typeorm: "0.3.20" },
+            { node: "17", typeorm: "0.3.20" },
+            { node: "18", typeorm: "0.3.20" },
+            { node: "19", typeorm: "0.3.20" },
+            { node: "20", typeorm: "0.3.20" },
             { node: "21", typeorm: "0.3.20" },
           ]
 
