@@ -1,9 +1,11 @@
 import { ObjectLiteral, SelectQueryBuilder } from "typeorm";
+import { parseOptions } from "./options/parse-options";
+import { Options } from "./options/options";
 
 async function* batchGenerator<T extends ObjectLiteral>(
   queryBuilder: SelectQueryBuilder<T>,
-  batchSize: number,
-) {
+  { batchSize }: Options,
+): AsyncGenerator<T[], void> {
   let offset = 0;
   let resultsLength: number;
 
@@ -25,15 +27,13 @@ async function* batchGenerator<T extends ObjectLiteral>(
 
 export function batch<T extends ObjectLiteral>(
   queryBuilder: SelectQueryBuilder<T>,
-  batchSize: number,
+  rawOptions: Options | number,
 ) {
   if (!queryBuilder) {
     throw new Error("Query builder is required");
   }
 
-  if (batchSize <= 0) {
-    throw new Error("Batch size must be greater than 0");
-  }
+  const options = parseOptions(rawOptions);
 
-  return batchGenerator(queryBuilder, batchSize);
+  return batchGenerator(queryBuilder, options);
 }

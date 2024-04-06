@@ -1,18 +1,21 @@
-import { getE2EDataSource } from "./support/e2e-data-source";
-import { People } from "./support/people.entity";
-import { batch } from "../../dist";
+import { getE2EDataSource } from "../support/e2e-data-source";
+import { People } from "../support/people.entity";
+import { BatchStream } from "../../../dist";
 
-describe(batch, () => {
+describe(BatchStream, () => {
   it("batches results of a query builder", async () => {
     const queryBuilder = getE2EDataSource()
       .getRepository(People)
       .createQueryBuilder()
       .select();
 
-    const batches = [];
-    for await (const peopleBatch of batch(queryBuilder, 2)) {
-      batches.push(peopleBatch);
-    }
+    const batches = new Array<People>();
+    const stream = BatchStream(queryBuilder, 2);
+    const streamEnd = new Promise((resolve) => stream.on("end", resolve));
+
+    stream.on("data", (data) => batches.push(data));
+
+    await streamEnd;
 
     expect(batches).toEqual([
       [
