@@ -2,7 +2,7 @@ import { getE2EDataSource } from "./support/e2e-data-source";
 import { People } from "./support/people.entity";
 import { batch } from "../../dist";
 
-describe("Query Builder Batch", () => {
+describe(batch, () => {
   it("batches results of a query builder", async () => {
     const queryBuilder = getE2EDataSource()
       .getRepository(People)

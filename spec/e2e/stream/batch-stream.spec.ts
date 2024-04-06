@@ -1,8 +1,8 @@
 import { getE2EDataSource } from "../support/e2e-data-source";
 import { People } from "../support/people.entity";
-import { QueryBuilderBatchStream } from "../../../dist";
+import { BatchStream } from "../../../dist";
 
-describe("Query Builder Batch Stream", () => {
+describe(BatchStream, () => {
   it("batches results of a query builder", async () => {
     const queryBuilder = getE2EDataSource()
       .getRepository(People)
@@ -10,7 +10,7 @@ describe("Query Builder Batch Stream", () => {
       .select();
 
     const batches = new Array<People>();
-    const stream = QueryBuilderBatchStream(queryBuilder, 2);
+    const stream = BatchStream(queryBuilder, 2);
     const streamEnd = new Promise((resolve) => stream.on("end", resolve));
 
     stream.on("data", (data) => batches.push(data));

@@ -3,7 +3,7 @@ import { ObjectLiteral, SelectQueryBuilder } from "typeorm";
 import { batch } from "../query-builder-batch";
 import { Options } from "../options/options";
 
-export function QueryBuilderBatchStream<T extends ObjectLiteral>(
+export function BatchStream<T extends ObjectLiteral>(
   queryBuilder: SelectQueryBuilder<T>,
   options: Options | number,
 ) {

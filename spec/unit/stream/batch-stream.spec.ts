@@ -1,15 +1,15 @@
 import { ObjectLiteral, SelectQueryBuilder } from "typeorm";
 import * as batch from "../../../src/query-builder-batch";
-import { QueryBuilderBatchStream } from "../../../src";
+import { BatchStream } from "../../../src";
 import { Readable } from "stream";
 
-describe(QueryBuilderBatchStream, () => {
+describe(BatchStream, () => {
   it("uses batch method to create a Readable stream", async () => {
     const queryBuilder = {} as SelectQueryBuilder<ObjectLiteral>;
     const batchSize = 1;
     const batchSpy = jest.spyOn(batch, "batch");
 
-    QueryBuilderBatchStream(queryBuilder, batchSize);
+    BatchStream(queryBuilder, batchSize);
 
     expect(batchSpy).toHaveBeenCalledWith(queryBuilder, batchSize);
   });
@@ -18,7 +18,7 @@ describe(QueryBuilderBatchStream, () => {
     const queryBuilder = {} as SelectQueryBuilder<ObjectLiteral>;
     const batchSize = 1;
 
-    const stream = QueryBuilderBatchStream(queryBuilder, batchSize);
+    const stream = BatchStream(queryBuilder, batchSize);
 
     expect(stream).toBeInstanceOf(Readable);
   });
