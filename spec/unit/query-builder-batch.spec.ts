@@ -1,8 +1,19 @@
 import { ObjectLiteral, SelectQueryBuilder } from "typeorm";
 import Mock = jest.Mock;
 import { batch } from "../../src";
+import * as parseOptions from "../../src/options/parse-options";
 
 describe(batch, () => {
+  it("uses parse-options to parse and validate options", () => {
+    const queryBuilder = {} as SelectQueryBuilder<ObjectLiteral>;
+    const batchSize = 1;
+    const parseOptionsSpy = jest.spyOn(parseOptions, "parseOptions");
+
+    batch(queryBuilder, batchSize);
+
+    expect(parseOptionsSpy).toHaveBeenCalledWith(batchSize);
+  });
+
   describe("validations", () => {
     it("throws an error if queryBuilder is not provided", () => {
       const queryBuilder =
@@ -11,15 +22,6 @@ describe(batch, () => {
 
       expect(() => batch(queryBuilder, batchSize).next()).toThrow(
         "Query builder is required",
-      );
-    });
-
-    it("throws an error if batchSize is less than or equal to 0", () => {
-      const queryBuilder = {} as SelectQueryBuilder<ObjectLiteral>;
-      const batchSize = 0;
-
-      expect(() => batch(queryBuilder, batchSize).next()).toThrow(
-        "Batch size must be greater than 0",
       );
     });
   });
