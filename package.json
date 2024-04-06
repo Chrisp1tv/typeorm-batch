@@ -1,6 +1,6 @@
 {
   "name": "typeorm-batch",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "Provides batching functionality to TypeORM through async iterators and streams.",
   "main": "index.js",
   "scripts": {
