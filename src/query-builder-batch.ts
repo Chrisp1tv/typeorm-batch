@@ -5,7 +5,7 @@ import { Options } from "./options/options";
 async function* batchGenerator<T extends ObjectLiteral>(
   queryBuilder: SelectQueryBuilder<T>,
   { batchSize }: Options,
-) {
+): AsyncGenerator<T[], void> {
   let offset = 0;
   let resultsLength: number;
 
